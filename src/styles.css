@@ -1,5 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
+/* Unused shadcn components are not rendered. Skipping them keeps those utilities out of the production CSS. */
+@source not "../src/components/ui";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

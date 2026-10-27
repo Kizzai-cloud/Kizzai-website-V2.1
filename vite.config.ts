@@ -7,7 +7,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
+// wrangler.jsonc main alone is insufficient.
 export default defineConfig({
   // Vite preview loads TanStack Start's server bundle from dist/server/server.js.
   // Nitro replaces that output with .output/server/index.mjs, which leaves the
@@ -15,5 +15,13 @@ export default defineConfig({
   nitro: false,
   tanstackStart: {
     server: { entry: "server" },
+  },
+  vite: {
+    build: {
+      sourcemap: false,
+      // Gzip-size reporting does not change the output files. Skipping it
+      // avoids an extra compression pass on memory-limited machines.
+      reportCompressedSize: false,
+    },
   },
 });

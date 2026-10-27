@@ -1,7 +1,7 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { InstagramIcon as Instagram, LinkedinIcon as Linkedin, TwitterIcon as Twitter, YoutubeIcon as Youtube } from "./SocialIcons";
 import { useState } from "react";
-import contactHero from "@/assets/contact-hero.png";
+import contactHero from "@/assets/contact-hero.jpg";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
