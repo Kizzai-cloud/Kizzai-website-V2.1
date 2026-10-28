@@ -15,6 +15,10 @@ export default defineConfig({
   nitro: false,
   tanstackStart: {
     server: { entry: "server" },
+    prerender: {
+      enabled: true,
+      failOnError: true,
+    },
   },
   vite: {
     build: {

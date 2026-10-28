@@ -4,7 +4,8 @@ import { useState } from "react";
 import contactHero from "@/assets/contact-hero.jpg";
 
 export function Contact() {
-  const [sent, setSent] = useState(false);
+  const [isOpeningEmail, setIsOpeningEmail] = useState(false);
+  const [emailDraftOpened, setEmailDraftOpened] = useState(false);
   const socialLinks = [
     { label: "Instagram", href: "https://www.instagram.com/kizzai_private_limited/", Icon: Instagram },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/kizzai-kizzai-6a8aaa418/?isSelfProfile=true", Icon: Linkedin },
@@ -34,9 +35,13 @@ export function Contact() {
       ].join("\n"),
     });
 
-    setSent(true);
+    setIsOpeningEmail(true);
+    setEmailDraftOpened(false);
     window.location.href = `mailto:sales@kizzai.com?${emailParameters.toString()}`;
-    setTimeout(() => setSent(false), 4000);
+    setTimeout(() => {
+      setIsOpeningEmail(false);
+      setEmailDraftOpened(true);
+    }, 500);
   };
 
   return (
@@ -117,16 +122,21 @@ export function Contact() {
 
             <button
               type="submit"
-              disabled={sent}
+              disabled={isOpeningEmail}
               className="btn-primary mt-6 inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium w-full sm:w-auto"
             >
-              {sent ? "Message sent ✓" : (
+              {isOpeningEmail ? "Opening email app..." : (
                 <>
-                  Send Message
+                  Open Email Draft
                   <Send size={14} />
                 </>
               )}
             </button>
+            <p className="mt-3 text-xs text-muted-foreground" aria-live="polite">
+              {emailDraftOpened
+                ? "Your email draft is ready. Send it from your email app."
+                : "This opens your default email app with the enquiry filled in."}
+            </p>
           </form>
         </div>
       </div>
